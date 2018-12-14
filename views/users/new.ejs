@@ -1,0 +1,51 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <!--<div class="py-5 text-center">-->
+        <!--&lt;!&ndash;<img class="d-block mx-auto mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">&ndash;&gt;-->
+        <!--<h2>Checkout form</h2>-->
+        <!--<p class="lead">Below is an example form built entirely with Bootstrap's form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>-->
+    <!--</div>-->
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6 pt-80">
+            <h3 class="mb-3">Create user</h3>
+            <% if (errors.length > 0) {  %>
+            <% for(var i = 0; i < errors.length; i++) { %>
+            <div class="alert alert-danger" role="alert">
+                <%= errors[i].msg %>
+            </div>
+            <% } %>
+            <% } %>
+
+                <form action="/users" method="post" class="needs-validation">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="username" placeholder="Username" <% if (inputs.length > 0) { %>value="<%= inputs[0].username %>"<% } %> required>
+                    </div>
+
+                    <div class="mb-3">
+                        <!--<div class="input-group">-->
+                            <!--<div class="input-group-prepend">-->
+                                <!--<span class="input-group-text">@</span>-->
+                            <!--</div>-->
+                        <input type="email" class="form-control" name="email" placeholder="Email" <% if (inputs.length > 0) { %> value="<%= inputs[0].email %>" <% } %> required>
+                        <!--</div>-->
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="password" class="form-control" name="password" placeholder="Password" <% if (inputs.length > 0) { %>value="<%= inputs[0].password %>"<% } %> required>
+                    </div>
+
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Create user</button>
+                </form>
+        </div>
+        <div class="col-md-3">
+        </div>
+</div>
+</div>
+
+<% include ../partials/footer %>
+
+
+

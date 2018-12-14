@@ -1,0 +1,36 @@
+/*body {*/
+  /*padding: 50px;*/
+  /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
+/*}*/
+
+/*a {*/
+  /*color: #00B7FF;*/
+/*}*/
+
+.pt-80 {
+  padding-top: 80px;
+}
+
+.mt-80 {
+  margin-top: 80px;
+}
+
+.white {
+  color: white;
+}
+
+.flex-d {
+  flex-direction: row;
+}
+
+.align-items {
+  align-items: center;
+}
+
+.margin-0-auto {
+  margin: 0 auto;
+}
+
+.center {
+  text-align: center;
+}
