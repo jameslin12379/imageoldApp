@@ -18,6 +18,19 @@ function isAuthenticated(req, res, next) {
     res.redirect('/login');
 }
 
+function isSelf(req, res, next) {
+    // do any checks you want to in here
+
+    // CHECK THE USER STORED IN SESSION FOR A CUSTOM VARIABLE
+    // you can do this however you want with whatever variables you set up
+    if (req.user.id.toString() === req.params.id){
+        console.log('equal');
+        return next();
+    }
+    // IF A USER ISN'T LOGGED IN, THEN REDIRECT THEM SOMEWHERE
+    res.redirect('/403');
+}
+
 function isNotAuthenticated(req, res, next) {
     // do any checks you want to in here
 
@@ -800,7 +813,7 @@ router.post('/users', isNotAuthenticated, [
                         throw error;
                     }
                     console.log('done');
-                    req.flash('success', 'You have successfully registered.');
+                    req.flash('alert', 'You have successfully registered.');
                     res.redirect('/login');
                 });
             });
@@ -824,8 +837,8 @@ router.delete('/users/:id', isAuthenticated, isAdmin, function(req, res){
 });
 
 // GET request to update User.
-router.get('/users/:id/edit', isAuthenticated, isAdminOrSelf, function(req, res){
-    connection.query('SELECT username, email, password FROM user WHERE id = ?', [req.params.id], function (error, results, fields) {
+router.get('/users/:id/edit', isAuthenticated, isSelf, function(req, res){
+    connection.query('SELECT email, password, username, description FROM user WHERE id = ?', [req.params.id], function (error, results, fields) {
         // error will be an Error if one occurred during the query
         // results will contain the results of the query
         // fields will contain information about the returned results fields (if any)
@@ -935,7 +948,11 @@ router.get('/users', isAuthenticated, isAdmin, function(req, res){
 /// LOGIN ROUTES ///
 
 router.get('/login', isNotAuthenticated, function(req, res) {
-    res.render('login', { errors: req.flash('errors') });
+    res.render('login', {
+        errors: req.flash('errors'),
+        input: req.flash('input'),
+        alert: req.flash('alert')
+    });
 });
 
 router.post('/login', isNotAuthenticated, passport.authenticate('local', {
@@ -955,5 +972,9 @@ router.get('/logout', isAuthenticated, function(req, res){
 router.get('/403', function(req, res){
     res.render('403');
 });
+
+router.get('/test', function (req, res) {
+    res.render('test');
+})
 
 module.exports = router;

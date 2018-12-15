@@ -1,42 +1,16 @@
-/*body {*/
-  /*padding: 50px;*/
-  /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
-/*}*/
-
-/*a {*/
-  /*color: #00B7FF;*/
-/*}*/
-
-.pt-80 {
-  padding-top: 80px;
+html,
+body {
+  height: 100%;
 }
 
-.mt-80 {
-  margin-top: 80px;
-}
-
-.white {
-  color: white;
-}
-
-.flex-d {
-  flex-direction: row;
-}
-
-.align-items {
+body {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
   align-items: center;
-}
-
-.margin-0-auto {
-  margin: 0 auto;
-}
-
-.center {
-  text-align: center;
-}
-
-.mb-zero {
-  margin-bottom: 0 !important;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
 }
 
 .form-signin {
@@ -64,19 +38,7 @@
   border-bottom-left-radius: 0;
 }
 .form-signin input[type="password"] {
-  /*margin-bottom: 10px;*/
+  margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-}
-
-input, button {
-  border-radius: 0 !important;
-}
-
-/*body {*/
-  /*height: initial;*/
-/*}*/
-
-.alert {
-  border-radius: 0;
 }
