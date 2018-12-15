@@ -10,6 +10,8 @@ let passport = require('passport')
 let LocalStrategy = require('passport-local').Strategy;
 let flash = require('connect-flash');
 let methodOverride = require("method-override");
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 
 var indexRouter = require('./routes/index');
@@ -82,11 +84,20 @@ passport.use(new LocalStrategy({
             }
 
             // if the user is found but the password is wrong
-            if (!( rows[0].password === password))
-                return done(null, false, req.flash('errors', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+            const hash = rows[0].password.toString();
+            console.log(hash);
+            bcrypt.compare(password, hash, function(err, response) {
+                if (response === true) {
+                    return done(null, {id: rows[0].id, username: rows[0].username});
+                }
+                return done(null, false, req.flash('errors', 'Oops! Wrong password.'));
+            });
+            // if (!( rows[0].password === password))
+            //     return done(null, false, req.flash('errors', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
 
             // all is well, return successful user
-            return done(null, rows[0]);
+
+            // return done(null, rows[0]);
 
         });}
 ));

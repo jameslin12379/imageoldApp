@@ -34,3 +34,7 @@
 .center {
   text-align: center;
 }
+
+.mb-zero {
+  margin-bottom: 0 !important;
+}
