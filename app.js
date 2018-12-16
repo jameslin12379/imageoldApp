@@ -22,7 +22,8 @@ var connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
     password : 'Pudong67',
-    database : 'imageApp'
+    database : 'imageApp',
+    multipleStatements: true
 });
 
 connection.connect(function(err) {
