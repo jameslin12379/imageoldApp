@@ -911,7 +911,7 @@ router.put('/users/:id', isAuthenticated, isAdminOrSelf, [
 
 // GET request for one User.
 router.get('/users/:id', function(req, res){
-    connection.query('SELECT id, username, email, password FROM `user` WHERE id = ?', [req.params.id], function (error, results, fields) {
+    connection.query('SELECT id, username, email, password, datecreated, description FROM `user` WHERE id = ?', [req.params.id], function (error, results, fields) {
         // error will be an Error if one occurred during the query
         // results will contain the results of the query
         // fields will contain information about the returned results fields (if any)
@@ -937,6 +937,26 @@ router.get('/users', isAuthenticated, isAdmin, function(req, res){
             throw error;
         }
         res.render('users/index', {
+            req: req,
+            users: results,
+            title: 'Users',
+            alert: req.flash('alert')
+        });
+    });
+});
+
+/// TOPIC ROUTES ///
+// GET request for list of all User items.
+router.get('/topics', function(req, res){
+    connection.query('SELECT * FROM `topic`', function (error, results, fields) {
+        // error will be an Error if one occurred during the query
+        // results will contain the results of the query
+        // fields will contain information about the returned results fields (if any)
+        if (error) {
+            throw error;
+        }
+        console.log(results);
+        res.render('topics/index', {
             req: req,
             users: results,
             title: 'Users',

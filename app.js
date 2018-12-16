@@ -90,7 +90,7 @@ passport.use(new LocalStrategy({
                 if (response === true) {
                     return done(null, {id: rows[0].id, username: rows[0].username});
                 }
-                return done(null, false, req.flash('errors', 'Oops! Wrong password.'));
+                return done(null, false, req.flash('errors', 'Oops! Wrong password.'), req.flash('input', email));
             });
             // if (!( rows[0].password === password))
             //     return done(null, false, req.flash('errors', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
